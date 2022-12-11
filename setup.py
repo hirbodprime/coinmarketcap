@@ -5,7 +5,7 @@ with open("readme.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='coinmarketcap',
+    name='coinmarketcapscraper',
     version='0.0.1',
     author='hirbod aflaki',
     author_email='hirbodprime@gmail.com',
@@ -24,6 +24,6 @@ setuptools.setup(
         "Operating System :: Microsoft :: Windows",
     ],
     license='MIT',
-    packages=['coinmarketcap'],
+    packages=['coinmarketcapscraper'],
     install_requires=['beautifulsoup4' , 'requests' , 'colorama'],
 )
