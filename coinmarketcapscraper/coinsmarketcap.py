@@ -12,7 +12,7 @@ colorama.init(autoreset=True)
 
 # when python3 coinmarketcap -h or --help it shows the project name and options
 # %prog is built in for OptionParser 
-usage = "usage: %prog --download-logos --coin-data"
+usage = "usage: %prog  --download-logos  --coin-data  --coin-file"
 
 # creates a instance of OptionParser to parser
 parser = OptionParser(usage=usage)
