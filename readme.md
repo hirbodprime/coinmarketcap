@@ -19,9 +19,9 @@ python3 coinmarketcap.py -h
 ```   
 Usage: &ensp; coinsmarketcap.py  --download-logos  --coin-data  --coin-file  
 Options:     
-&nbsp; -h, --help            show this help message and exit      
-&nbsp; -d, --download-logos  download the top 10 coinmarketcap.com coin logos       
-&nbsp; -c, --coin-data       extracts coin data     
+    -h, --help            show this help message and exit      
+    -d, --download-logos  download the top 10 coinmarketcap.com coin logos       
+    -c, --coin-data       extracts coin data     
 ```  
 
 
