@@ -13,12 +13,15 @@ pip install git+https://github.com/hirbodprime/coinmarketcap.git
 # if using terminal 
 ## use -d to download logos && use -c to extract coin data
 ## use -h to see help
-``` python3 coinmarketcap.py -h   
-Usage:&ensp;coinsmarketcap.py  --download-logos  --coin-data  --coin-file  
+```
+python3 coinmarketcap.py -h
+```
+```   
+Usage: &ensp; coinsmarketcap.py  --download-logos  --coin-data  --coin-file  
 Options:     
-&nbsp;-h, --help            show this help message and exit      
-&nbsp;-d, --download-logos  download the top 10 coinmarketcap.com coin logos       
-&nbsp;-c, --coin-data       extracts coin data     
+&nbsp; -h, --help            show this help message and exit      
+&nbsp; -d, --download-logos  download the top 10 coinmarketcap.com coin logos       
+&nbsp; -c, --coin-data       extracts coin data     
 ```  
 
 
