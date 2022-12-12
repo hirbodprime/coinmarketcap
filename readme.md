@@ -27,12 +27,12 @@ Options:
 
 # if importing (check coinimport)
 ## first import 
-``` from coinmarketcapscraper.coinsmarketcap import scraper ```
+``` from coinmarketcapscraper.coinsmarketcap import Scraper ```
 
 ## then use create an object from scraper class and set the options based on your needs
 ``` 
-app = scraper(downloadlogo=True , coin_data=True,coin_data_file=True)  
-app.Run()  
+OBJ = Scraper(downloadlogo=True , coin_data=True,coin_data_file=True)  
+OBJ.run()  
 ```
 
 
