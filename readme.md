@@ -17,7 +17,7 @@ pip install git+https://github.com/hirbodprime/coinmarketcap.git
 python3 coinmarketcap.py -h
 ```
 ```   
-Usage: &ensp; coinsmarketcap.py  --download-logos  --coin-data  --coin-file  
+Usage:  coinsmarketcap.py  --download-logos  --coin-data  --coin-file  
 Options:     
     -h, --help            show this help message and exit      
     -d, --download-logos  download the top 10 coinmarketcap.com coin logos       
