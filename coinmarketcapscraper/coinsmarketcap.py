@@ -54,7 +54,7 @@ dict_data = {}
 
 
 
-class scraper:
+class Scraper:
 
     def __init__(self, downloadlogo, coin_data, coin_data_file):
         self._downloadlogo = downloadlogo
@@ -105,9 +105,12 @@ class scraper:
             with open('data.json' , 'w') as f:
                 json.dump(data_list , f ,ensure_ascii=False)
         else:
-            print(data_list)
+            if __name__ == "__main__":
+                print(data_list)
+            else:
+                return data_list
 
-    def Run(self):
+    def run(self):
         if __name__ == "__main__":
             if options.data == True and options.logo == True:
                 self._main()
@@ -176,10 +179,11 @@ class scraper:
             with open('data.json' , 'w') as f:
                 json.dump(data_list , f ,ensure_ascii=False)
         else:
-            print(data_list)
+            if __name__ == "__main__":
+                print(data_list)
+            else:
+                return data_list
 
 if __name__ == "__main__":
-    scraperOBJ = scraper(downloadlogo=options.logo,coin_data=options.data,coin_data_file=options.file)
-    scraperOBJ.Run()
-# if __name__ == "coinmarketcapscraper.coinsmarketcap":
-#     pass
+    scraperOBJ = Scraper(downloadlogo=options.logo,coin_data=options.data,coin_data_file=options.file)
+    scraperOBJ.run()
