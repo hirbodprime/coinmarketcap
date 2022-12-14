@@ -61,7 +61,7 @@ dict_data = {}
 
 class Scraper:
 
-    def __init__(self, download_all_logos, coin_data, coin_data_file ,download_logo_sybmol=None ):
+    def __init__(self, download_all_logos, coin_data, coin_data_file ,download_logo_sybmol=None):
         self._downloadlogo = download_all_logos
         self._coin_data = coin_data
         self._coin_data_file = coin_data_file
@@ -219,12 +219,14 @@ class Scraper:
 
                 # just acting like a hacker and printing the logo symbol when downloaded in green
                 print(f'{colorama.Fore.LIGHTGREEN_EX} downloaded {symbol.string} LOGO successfully')
-                
+                my_list = [reqlogo , symbol.string]
+                return my_list
                 # opening the url and writing the content to the file
-                with open(filename , 'wb') as f:
-                    f.write(reqlogo.content)
-                f.close()   
+                # with open(filename , 'wb') as f:
+                #     f.write(reqlogo.content)
+                # f.close()   
                 break
+                
 
 if __name__ == "__main__":
     scraperOBJ = Scraper(download_all_logos=options.logo,coin_data=options.data,coin_data_file=options.file , download_logo_sybmol=options.logosymbol)
