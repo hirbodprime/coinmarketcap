@@ -17,15 +17,20 @@ usage = "usage: %prog  --download-logos  --coin-data  --coin-file"
 # creates a instance of OptionParser to parser
 parser = OptionParser(usage=usage)
 
+parser.add_option("-s", "--logo-symbol",type="str" ,action="store",dest="logosymbol",
+    help="downloads logo by the symbol")
+
 # when running the file if we use -d or --dowload-logos this parser will return True
 parser.add_option("-d", "--download-logos", dest="logo",
         action="store_true", # if -d is called it will store True
         default=False, # by default it's false which means we are not parsing -d to it
         help="download the top 10 coinmarketcap.com coin logos")
+
 parser.add_option('-f', "--coin-file",dest='file',
         action="store_true",
         default=False,
         help="saves coin data in a file")
+
 parser.add_option('-c', "--coin-data",dest='data',
         action="store_true",
         default=False,
@@ -56,10 +61,12 @@ dict_data = {}
 
 class Scraper:
 
-    def __init__(self, downloadlogo, coin_data, coin_data_file):
-        self._downloadlogo = downloadlogo
+    def __init__(self, download_all_logos, coin_data, coin_data_file ,download_logo_sybmol=None ):
+        self._downloadlogo = download_all_logos
         self._coin_data = coin_data
         self._coin_data_file = coin_data_file
+        self._download_logo_symbol = download_logo_sybmol
+
 
     def _main(self):
         # make a dir named logos if doesn't exists
@@ -118,7 +125,9 @@ class Scraper:
                 if options.data == True:
                     self.get_coin_data()
                 elif options.logo == True:
-                    self.get_coin_data()
+                    self.get_logo()
+                elif options.logosymbol:
+                    self.download_logo_symbol()
                 else:
                     print("either -d or -c should be set")
         else:
@@ -133,7 +142,12 @@ class Scraper:
                     print("either -d or -c should be set")
 
     def get_logo(self):
+        # make a dir named logos if doesn't exists
+        os.makedirs("logos",exist_ok=True)
+        # cd to the created dir
+        os.chdir("logos")
         for tr in trs[:10]:
+            name , price = tr.contents[2:4]
             # getting the symbol from tr content in td tags
             symbol = name.find('p' , class_="sc-e225a64a-0 dfeAJi coin-item-symbol")
             
@@ -184,6 +198,34 @@ class Scraper:
             else:
                 return data_list
 
+    def download_logo_symbol(self):
+        # make a dir named logos if doesn't exists
+        os.makedirs("logos",exist_ok=True)
+        # cd to the created dir
+        os.chdir("logos")
+        for tr in trs[:10]:
+            name , price = tr.contents[2:4]
+            # getting the symbol from tr content in td tags
+            symbol = name.find('p' , class_="sc-e225a64a-0 dfeAJi coin-item-symbol")
+            # getting the logo from tr content in td tags
+            if tr.find("img", class_="coin-logo",alt=f"{self._download_logo_symbol} logo"):
+                logo = tr.find("img", class_="coin-logo",alt=f"{self._download_logo_symbol} logo")
+                print(symbol.string , logo['src'])
+                # creating a dynamic cool filename
+                filename = f"logo-{symbol.string}.jpg"
+
+                # downloading the logo (logo['src'] is the direct url to the logo )
+                reqlogo = requests.get(logo['src'])
+
+                # just acting like a hacker and printing the logo symbol when downloaded in green
+                print(f'{colorama.Fore.LIGHTGREEN_EX} downloaded {symbol.string} LOGO successfully')
+                
+                # opening the url and writing the content to the file
+                with open(filename , 'wb') as f:
+                    f.write(reqlogo.content)
+                f.close()   
+                break
+
 if __name__ == "__main__":
-    scraperOBJ = Scraper(downloadlogo=options.logo,coin_data=options.data,coin_data_file=options.file)
+    scraperOBJ = Scraper(download_all_logos=options.logo,coin_data=options.data,coin_data_file=options.file , download_logo_sybmol=options.logosymbol)
     scraperOBJ.run()
