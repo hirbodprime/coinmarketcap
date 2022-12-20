@@ -70,9 +70,9 @@ class Scraper:
 
     def _main(self):
         # make a dir named logos if doesn't exists
-        os.makedirs("logos",exist_ok=True)
+        # os.makedirs("logos",exist_ok=True)
         # cd to the created dir
-        os.chdir("logos")
+        # os.chdir("logos")
         for tr in trs[:10]:
             # getting the name and price from tr content in td tags
             name , price = tr.contents[2:4]
@@ -199,10 +199,6 @@ class Scraper:
                 return data_list
 
     def download_logo_symbol(self):
-        # make a dir named logos if doesn't exists
-        os.makedirs("logos",exist_ok=True)
-        # cd to the created dir
-        os.chdir("logos")
         for tr in trs[:10]:
             name , price = tr.contents[2:4]
             # getting the symbol from tr content in td tags
@@ -216,10 +212,10 @@ class Scraper:
 
                 # downloading the logo (logo['src'] is the direct url to the logo )
                 reqlogo = requests.get(logo['src'])
-
+                logo_link = logo['src']
                 # just acting like a hacker and printing the logo symbol when downloaded in green
                 print(f'{colorama.Fore.LIGHTGREEN_EX} downloaded {symbol.string} LOGO successfully')
-                my_list = [reqlogo , symbol.string]
+                my_list = [logo_link , symbol.string , reqlogo]
                 return my_list
                 # opening the url and writing the content to the file
                 # with open(filename , 'wb') as f:
