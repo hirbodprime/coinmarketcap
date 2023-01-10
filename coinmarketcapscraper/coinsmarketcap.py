@@ -142,10 +142,14 @@ class Scraper:
                     print("either -d or -c should be set")
 
     def get_logo(self):
-        # make a dir named logos if doesn't exists
-        os.makedirs("logos",exist_ok=True)
-        # cd to the created dir
-        os.chdir("logos")
+        my_list = []
+        my_dict = {}
+        if __name__ == "__main__":
+            # make a dir named logos if doesn't exists
+            os.makedirs("logos",exist_ok=True)
+            # cd to the created dir
+            os.chdir("logos")
+
         for tr in trs[:10]:
             name , price = tr.contents[2:4]
             # getting the symbol from tr content in td tags
@@ -164,10 +168,11 @@ class Scraper:
             # just acting like a hacker and printing the logo symbol when downloaded in green
             print(f'{colorama.Fore.LIGHTGREEN_EX} downloaded {symbol.string} LOGO successfully')
             
-            # opening the url and writing the content to the file
-            with open(filename , 'wb') as f:
-                f.write(reqlogo.content)
-            f.close()   
+            if __name__ == "__main__":    
+                # opening the url and writing the content to the file
+                with open(filename , 'wb') as f:
+                    f.write(reqlogo.content)
+                f.close()   
 
     def get_coin_data(self):
         for tr in trs[:10]:
